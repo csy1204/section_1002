@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   end
   
   def write
-    post = Post.new(title: params[:title], content: params[:content])
+    post = Post.new(title: params[:title], content: params[:content], user: current_user)
     post.save
     
     redirect_to "/home/index"
@@ -35,4 +35,19 @@ class HomeController < ApplicationController
     redirect_to '/home/index'
   end
   
+  
+  def reply_write
+    reply = Reply.new(content: params[:comment],post_id: params[:postid], user: current_user)
+    reply.save
+    
+    redirect_to :back
+    
+  end
+  
+  def reply_destroy
+    @one_reply = Reply.find(params[:id])
+    @one_reply.destroy
+    redirect_to '/home/index'
+  end
+    
 end

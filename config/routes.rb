@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'home#index'  
   get 'home/index'
   post 'home/write' => 'home#write'
   get 'destroy/:id' => 'home#destroy'
   get 'update/:id' => 'home#update'
   post '/update_act/:id' => 'home#update_act' 
+  post 'home/reply_write' => 'home#reply_write'
+  get 'reply_destroy/:id' => 'home#reply_destroy'
+  
+  
 
 
   # The priority is based upon order of creation: first created -> highest priority.
